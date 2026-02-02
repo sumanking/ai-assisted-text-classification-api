@@ -1,96 +1,90 @@
+# AI-Assisted Text Classification API
 
-AI-Assisted Text Classification API
+## 📌 Overview
 
+The **AI-Assisted Text Classification API** is a backend service built using **Java** and **Spring Boot** that classifies user-provided text into one of the following categories:
 
-Overview
+- **Complaint**
+- **Query**
+- **Feedback**
+- **Other**
 
-The AI-Assisted Text Classification API is a backend service built using Java and Spring Boot that classifies user-provided text into one of the following categories:
+The classification is performed using a **Large Language Model (LLM)** via the **Groq API**, ensuring intelligent, context-aware categorization instead of traditional rule-based keyword matching.
 
-Complaint
+This project demonstrates how to design, integrate, and expose an **AI-powered backend service** using clean architecture and REST principles.
 
-Query
+---
 
-Feedback
+## ✨ Features
 
-Other
+- RESTful API with a single POST endpoint  
+- AI-driven text classification (no hard-coded rules)  
+- Integration with Groq’s OpenAI-compatible API  
+- Clear separation of controller and service layers  
+- Graceful error handling with safe defaults  
+- Easily testable using Postman or any REST client  
 
-The classification is performed using a Large Language Model (LLM) via the Groq API, ensuring intelligent, context-aware categorization instead of rule-based keyword matching.
+---
 
-This project demonstrates how to design, integrate, and expose an AI-powered service using clean backend architecture and REST principles.
+## 🛠️ Technology Stack
 
-Features
+- **Language:** Java 21  
+- **Framework:** Spring Boot  
+- **Build Tool:** Maven  
+- **AI Provider:** Groq API (OpenAI-compatible)  
+- **HTTP Client:** Spring WebClient  
+- **JSON Parsing:** Jackson  
 
-RESTful API with a single POST endpoint
+---
 
-AI-driven text classification (no hard-coded rules)
+## 🏗️ Architecture Overview
 
-Integration with Groq’s OpenAI-compatible API
+Controller → Service → Groq AI API
+↓ ↓
+Request AI Response
+↓ ↓
+JSON Input Category Output
 
-Clear separation of controller and service layers
+---
 
-Graceful error handling with safe defaults
+## 🎯 Key Design Principles
 
-Easily testable using Postman or any REST client
+- Business logic is isolated in the **service layer**
+- AI is responsible for **all classification decisions**
+- Backend only validates and normalizes AI output
+- No rule-based categorization in Java code
 
-Technology Stack
+---
 
-Language: Java 21
+## 📡 API Specification
 
-Framework: Spring Boot
+### Endpoint
 
-Build Tool: Maven
-
-AI Provider: Groq API (OpenAI-compatible)
-
-HTTP Client: Spring WebClient
-
-JSON Parsing: Jackson
-
-Architecture Overview
-Controller  →  Service  →  Groq AI API
-   ↓             ↓
-Request       AI Response
-   ↓             ↓
-JSON Input   Category Output
-
-Key Design Principles
-
-Business logic is isolated in the service layer
-
-AI is responsible for all classification decisions
-
-Backend only validates and normalizes AI output
-
-No rule-based categorization in Java code
-
-API Specification
-Endpoint
 POST /api/classify
 
-Request Headers
+### Request Headers
 Content-Type: application/json
 
-Request Body
+
+### Request Body
+```json
 {
   "text": "Your input text here"
 }
-
-Response Body
+### Response Body
 {
   "category": "Complaint | Query | Feedback | Other"
 }
+🧠 Classification Logic (AI-Driven)
 
-Classification Logic (AI-Driven)
-
-The AI model classifies text based on semantic meaning:
+The AI model classifies text based on semantic meaning, not keywords.
 
 Category	Description
 Complaint	Problems, issues, dissatisfaction
 Query	Questions or requests for information
-Feedback	Explicit praise or opinion
+Feedback	Explicit praise or opinions
 Other	Greetings, small talk, neutral messages
-
-Examples:
+Examples
 
 "The app crashes when I pay" → Complaint
 
@@ -100,17 +94,25 @@ Examples:
 
 "Hello there" → Other
 
-Error Handling Strategy
+⚠️ Error Handling Strategy
 
-If the AI API fails, times out, or returns unexpected output:
+If the AI API:
+
+fails
+
+times out
+
+returns unexpected output
+
+Then:
 
 The service safely returns "Other"
 
 No assumptions or rule-based guessing are applied
 
-This guarantees API stability under all conditions
+This guarantees API stability under all conditions.
 
-Environment Setup
+⚙️ Environment Setup
 Prerequisites
 
 Java 21 installed
@@ -121,48 +123,42 @@ Groq API key
 
 Configuration
 application.properties
-ai.api.key=My_GROQ_API_KEY
+ai.api.key=MY_GROQ_API_KEY
 
 
-Note: Never commit real API keys to GitHub.
+⚠️ Important:
+Never commit real API keys to GitHub.
 Use environment variables or local configuration for production.
 
-Running the Application
+▶️ Running the Application
 mvn spring-boot:run
 
 
-The application will start on:
+The application will start at:
 
 http://localhost:8080
 
-Testing the API
+🧪 Testing the API
 Using Postman
 
-POST
+POST REQUEST
 
 http://localhost:8080/api/classify
 
-
-Sample Requests
-
 { "text": "The app crashes every time I try to pay" }
-
 { "text": "How can I change my email address?" }
-
 { "text": "The new update is amazing, great work!" }
-
 { "text": "Hello there" }
 
 Sample Responses
+
 { "category": "Complaint" }
-
 { "category": "Query" }
-
 { "category": "Feedback" }
-
 { "category": "Other" }
 
-Why Groq?
+
+🚀 Why Groq?
 
 Groq provides:
 
@@ -172,11 +168,11 @@ Extremely fast inference
 
 Stable free-tier usage
 
-Simple integration with existing OpenAI-style requests
+Simple integration with OpenAI-style requests
 
 This makes it ideal for backend AI integrations.
 
-Project Structure
+📁 Project Structure
 src/main/java
  └── com.example.ai_assist_text_classification_api
      ├── controller
@@ -188,7 +184,7 @@ src/main/java
      │   └── ClassificationResponse.java
      └── AiAssistTextClassificationApiApplication.java
 
-Future Enhancements
+🔮 Future Enhancements
 
 Support batch text classification
 
@@ -200,12 +196,12 @@ Add authentication and rate limiting
 
 Cache frequent classifications
 
-Conclusion
+🏁 Conclusion
 
-This project demonstrates a clean and professional approach to integrating AI into backend services using Spring Boot.
+This project demonstrates a clean, professional approach to integrating AI into backend services using Spring Boot.
 It avoids rule-based shortcuts and instead leverages modern AI models for intelligent decision-making.
 
-Author
+👤 Author
 
 Suman Acharyya
 Backend Developer | Java | Spring Boot | AI Integration
